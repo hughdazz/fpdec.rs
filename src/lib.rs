@@ -119,6 +119,10 @@ mod unops;
     archive(check_bytes),
     archive_attr(derive(Copy, Clone))
 )]
+#[cfg_attr(
+    all(feature = "bincode", not(feature = "packed")),
+    derive(bincode::Encode, bincode::Decode),
+)]
 #[cfg_attr(feature = "packed", repr(packed))]
 pub struct Decimal {
     coeff: i128,
